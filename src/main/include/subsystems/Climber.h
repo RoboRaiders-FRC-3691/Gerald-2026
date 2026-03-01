@@ -39,6 +39,6 @@ public:
 
   ctre::phoenix6::hardware::TalonFX m_MiddleClimber;
 
-  ctre::phoenix6::controls::MotionMagicVoltage m_PoseRequestOne;
+  ctre::phoenix6::controls::MotionMagicTorqueCurrentFOC m_PoseRequestOne;
   
 };

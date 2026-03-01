@@ -7,6 +7,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/Command.h>
 #include <frc2/command/CommandPtr.h>
+#include <ctre/phoenix6/controls/MotionMagicTorqueCurrentFOC.hpp>
 
 #include "Constants.h"
 
@@ -35,8 +36,8 @@ class Intake : public frc2::SubsystemBase {
  private:
 
   ctre::phoenix6::hardware::TalonFX m_PivotMotor;
-  ctre::phoenix6::controls::MotionMagicVoltage m_PoseRequest;
+  ctre::phoenix6::controls::MotionMagicTorqueCurrentFOC m_PoseRequest;
 
   ctre::phoenix6::hardware::TalonFX m_RollerMotor;
-  ctre::phoenix6::controls::MotionMagicVelocityVoltage m_VelRequest;
+  ctre::phoenix6::controls::MotionMagicVelocityTorqueCurrentFOC m_VelRequest;
 };
