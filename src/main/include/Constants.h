@@ -59,7 +59,7 @@ namespace IntakeConstants {
             .WithMotionMagicJerk(100_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
-            .WithSensorToMechanismRatio(0)
+            .WithSensorToMechanismRatio(1)
         );
 
         static constexpr ctre::phoenix6::configs::TalonFXConfiguration KRollerConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
@@ -81,7 +81,7 @@ namespace IntakeConstants {
             .WithMotionMagicJerk(100_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
-            .WithSensorToMechanismRatio(0)
+            .WithSensorToMechanismRatio(1)
         );
 }
 
@@ -116,7 +116,7 @@ namespace ShooterConstants {
             .WithMotionMagicJerk(100_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
-            .WithSensorToMechanismRatio(0)
+            .WithSensorToMechanismRatio(1)
         );
 
         static constexpr ctre::phoenix6::configs::TalonFXConfiguration KFlywheelR = ctre::phoenix6::configs::TalonFXConfiguration{}
@@ -138,7 +138,7 @@ namespace ShooterConstants {
             .WithMotionMagicJerk(100_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
-            .WithSensorToMechanismRatio(0)
+            .WithSensorToMechanismRatio(1)
         );
 
         static constexpr ctre::phoenix6::configs::TalonFXConfiguration KFeedConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
@@ -160,7 +160,7 @@ namespace ShooterConstants {
             .WithMotionMagicJerk(100_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
-            .WithSensorToMechanismRatio(0)
+            .WithSensorToMechanismRatio(1)
         );
 
 }
@@ -169,33 +169,33 @@ namespace ClimberConstants {
     inline constexpr ctre::phoenix6::CANBus kCanBus{"*"};
 
     inline constexpr int kCanIDOne = 40;
-    inline constexpr units::length::inch_t kPivotUpperLimit = 0_in;
-    inline constexpr units::length::inch_t kPivotLowerLimit = -0_in;
+    inline constexpr units::length::inch_t kPivotUpperLimit = 9.25_in;
+    inline constexpr units::length::inch_t kPivotLowerLimit = 0.25_in;
 
 
-    inline constexpr units::unit_t<turns_per_inch> kTurnsPerInch{1.5};
+    inline constexpr units::unit_t<turns_per_inch> kTurnsPerInch{0.324966};
 
 
     static constexpr ctre::phoenix6::configs::TalonFXConfiguration KMotorOneConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(ctre::phoenix6::configs::Slot0Configs{}
-                    
-            .WithKP(0)
-            .WithKI(0)
-            .WithKD(0)
+            .WithKS(.12)
+            .WithKV(.2)
+            .WithKA(.025)
 
-            .WithKS(0)
-            .WithKV(0)
-            .WithKA(0)
-            .WithKG(0)
-            .WithGravityType(ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
+            .WithKP(4)
+            .WithKI(0)
+            .WithKD(.5)
+
+            .WithKG(.2)
+            .WithGravityType(ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
         )
         .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
-            .WithMotionMagicCruiseVelocity(5_tps)
-            .WithMotionMagicAcceleration(10_tr_per_s_sq)
-            .WithMotionMagicJerk(100_tr_per_s_cu)
+            .WithMotionMagicCruiseVelocity(150_tps)
+            .WithMotionMagicAcceleration(250_tr_per_s_sq)
+            .WithMotionMagicJerk(2500_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
-            .WithSensorToMechanismRatio(0)
+            .WithSensorToMechanismRatio(15)
         );
 
 

@@ -19,11 +19,6 @@ class Climber : public frc2::SubsystemBase {
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
-private:
-
-   units::angle::turn_t InchToTurns(units::length::inch_t inch);
-
-   frc2::CommandPtr SetMotorPosition(units::length::inch_t positionOne);
 
 public:
 
@@ -33,12 +28,21 @@ public:
 
    frc2::CommandPtr RaiseClimber();
 
-  void Periodic() override;
+   
+   void Periodic() override;
+
+private:
+
+   units::angle::turn_t InchToTurns(units::length::inch_t inch);
+
+   frc2::CommandPtr SetClimberPosition(units::length::inch_t pos);
+   
+   bool IsValidPosition(units::length::inch_t pos);
 
  private:
 
   ctre::phoenix6::hardware::TalonFX m_MiddleClimber;
 
-  ctre::phoenix6::controls::MotionMagicTorqueCurrentFOC m_PoseRequestOne;
+  ctre::phoenix6::controls::MotionMagicTorqueCurrentFOC m_PoseRequest;
   
 };
