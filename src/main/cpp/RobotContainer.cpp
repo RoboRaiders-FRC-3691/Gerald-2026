@@ -54,7 +54,7 @@ void RobotContainer::ConfigureBindings()
     m_XboxController.LeftTrigger().OnTrue(m_intake.SetVel(intakeVelocityConstant)); // INTAKES FUEL
     m_XboxController.LeftBumper().OnTrue(m_intake.SetAngle(m_intake.GetPivotMin())); // LOWERS INTAKE
     m_XboxController.RightBumper().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
-    m_XboxController.Y().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL
+    m_XboxController.Y().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL  n 
     m_XboxController.X().OnTrue(m_climber.LowerClimber()); // LOWERS FROM L1 TO FLOOR
 }
 

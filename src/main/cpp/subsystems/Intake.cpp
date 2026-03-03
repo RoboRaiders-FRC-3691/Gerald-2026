@@ -15,7 +15,9 @@ m_RollerMotor(kCanIDRoller, kCanBus), m_VelRequest(0_rpm) {
 
 frc2::CommandPtr Intake::SetAngle(units::turn_t pos){
       return RunOnce([this, pos] {
-          m_PivotMotor.SetControl(m_PoseRequest.WithPosition(pos));
+           if(IsValidPosition(pos)){
+                    m_PivotMotor.SetControl(m_PoseRequest.WithPosition(pos));
+               }
   });
 }
 
@@ -39,6 +41,10 @@ frc2::CommandPtr Intake::SetVel(units::turns_per_second_t vel){
 
 units::angular_velocity::turns_per_second_t Intake::GetSpeedRollerMotor(){
   return m_PivotMotor.GetVelocity().GetValue();
+}
+
+bool Intake::IsValidPosition(units::turn_t pos) {
+     return (pos>=kPivotLowerLimit && pos<=kPivotUpperLimit);
 }
 
 void Intake::Periodic() {}

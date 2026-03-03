@@ -31,6 +31,8 @@ class Intake : public frc2::SubsystemBase {
 
   units::turns_per_second_t GetSpeedRollerMotor();
 
+  bool IsValidPosition(units::turn_t);
+
   //void Periodic() override;
 
  private:
