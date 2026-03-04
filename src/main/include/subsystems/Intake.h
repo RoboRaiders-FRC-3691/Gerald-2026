@@ -29,6 +29,8 @@ class Intake : public frc2::SubsystemBase {
 
   frc2::CommandPtr SetVel(units::turns_per_second_t vel);
 
+  frc2::CommandPtr RunIntake(units::turns_per_second_t vel);
+
   units::turns_per_second_t GetSpeedRollerMotor();
 
   bool IsValidPosition(units::turn_t);

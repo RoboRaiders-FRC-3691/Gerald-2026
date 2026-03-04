@@ -29,6 +29,22 @@ frc2::CommandPtr Shooter::SetFeedVel(units::turns_per_second_t vel){
         });
 }
 
+frc2::CommandPtr Shooter::RunFlywheel(units::turns_per_second_t vel){
+    return StartEnd([this, vel]{
+        m_FlywheelR.SetControl(m_VelRequestFeed.WithVelocity(vel));
+    },[this]{
+        m_FlywheelR.StopMotor();
+    });
+}
+
+frc2::CommandPtr Shooter::RunFeed(units::turns_per_second_t vel){
+    return StartEnd([this, vel]{
+        m_ShooterFeed.SetControl(m_VelRequestFeed.WithVelocity(vel));
+    },[this]{
+        m_ShooterFeed.StopMotor();
+    });
+}
+
 units::angular_velocity::turns_per_second_t Shooter::GetFlywheelVel(){
     return m_FlywheelR.GetVelocity().GetValue();
 }
