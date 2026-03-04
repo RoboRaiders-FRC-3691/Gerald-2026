@@ -40,3 +40,12 @@ void CommandSwerveDrivetrain::StartSimThread()
     });
     m_simNotifier->StartPeriodic(kSimLoopPeriod);
 }
+
+void CommandSwerveDrivetrain::AddClusterVisionMeasurments(){
+    m_VisionResults = m_VisionCluster.GetVisionEstimates();
+    if(m_VisionResults.size() > 0){
+        for (auto result : m_VisionResults){
+            AddVisionMeasurement(result.visionEstimate.estimatedPose.ToPose2d(), result.visionEstimate.timestamp, result.standardDeviations);
+        }
+    }
+}

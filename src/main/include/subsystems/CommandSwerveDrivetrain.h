@@ -10,6 +10,13 @@
 
 #include "generated/TunerConstants.h"
 
+#include "Constants.h"
+
+#include "Utils/Vision/VisionCluster.h"
+
+#include <frc/smartdashboard/SmartDashboard.h>
+#include "Utils/Widgets/SwerveWidget.h"
+
 using namespace ctre::phoenix6;
 
 namespace subsystems {
@@ -294,8 +301,23 @@ public:
         return _drivetrain.SamplePoseAt(utils::FPGAToCurrentTime(timestamp));
     }
 
+    // Implemented by Team 3691
+    // Configures Pathplanner (Currently uses defult configs)
+    void ConfigurePathPlanner();
+
+    // Implemented by Team 3691
+    // Adds vision cluseter measurements to the odometry
+    void AddClusterVisionMeasurments();
+    
+
 private:
     void StartSimThread();
+
+    VisionCluster m_VisionCluster;
+    std::vector<VisionPoseResult> m_VisionResults;
+
+    SwerveWidget m_SwerveWidget;
+
 };
 
 }

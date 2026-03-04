@@ -51,7 +51,7 @@ void RobotContainer::ConfigureBindings()
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
     m_XboxController.RightTrigger().OnTrue(m_shooter.SetFlywheelVel(shooterFlywheelConstant)); // SHOOTS FUEL
-    m_XboxController.LeftTrigger().OnTrue(m_intake.SetVel(intakeVelocityConstant)); // INTAKES FUEL
+    m_XboxController.LeftTrigger().OnTrue(m_shooter.SetFeedVel(FeedVelocityConstant)); // INTAKES FUEL
     m_XboxController.LeftBumper().OnTrue(m_intake.SetAngle(m_intake.GetPivotMin())); // LOWERS INTAKE
     m_XboxController.RightBumper().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
     m_XboxController.Y().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL  n 

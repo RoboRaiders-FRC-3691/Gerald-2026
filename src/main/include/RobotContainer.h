@@ -44,8 +44,8 @@ private:
     frc2::CommandXboxController m_XboxController{
     OperatorConstants::kDriverControllerPort};
 
-    units::turns_per_second_t shooterFlywheelConstant = 0_tps;
-    units::turns_per_second_t intakeVelocityConstant = 0_tps;
+    units::turns_per_second_t shooterFlywheelConstant = -55_tps;
+    units::turns_per_second_t FeedVelocityConstant = -33_tps;
     
     //Subsystems Declared
     Intake m_intake;
