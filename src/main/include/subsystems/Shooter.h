@@ -26,9 +26,9 @@ class Shooter : public frc2::SubsystemBase {
 
   frc2::CommandPtr SetFeedVel(units::turns_per_second_t vel);
 
-  frc2::CommandPtr RunFlywheel(units::turns_per_second_t vel);
+  frc2::CommandPtr RunFlywheel();
 
-  frc2::CommandPtr RunFeed(units::turns_per_second_t vel);
+  frc2::CommandPtr RunFeed();
 
   units::turns_per_second_t GetFlywheelVel();
 

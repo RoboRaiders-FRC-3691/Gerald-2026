@@ -50,13 +50,13 @@ void RobotContainer::ConfigureBindings()
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
-    m_XboxController.RightTrigger().WhileTrue(m_shooter.RunFlywheel(shooterFlywheelConstant)); // SHOOTS FUEL
-    m_XboxController.LeftTrigger().WhileTrue(m_shooter.RunFeed(FeedVelocityConstant));
-    m_XboxController.A().WhileTrue(m_intake.RunIntake(IntakeVelocityConstant)); // INTAKES FUEL
+    m_XboxController.RightTrigger().WhileTrue(m_shooter.RunFlywheel()); // SHOOTS FUEL
+    m_XboxController.RightBumper().WhileTrue(m_shooter.RunFeed()); // RUNS SHOOTER FEED`
+    m_XboxController.LeftTrigger().WhileTrue(m_intake.RunIntake()); // INTAKES FUEL
     m_XboxController.LeftBumper().OnTrue(m_intake.SetAngle(m_intake.GetPivotMin())); // LOWERS INTAKE
-    m_XboxController.RightBumper().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
+    m_XboxController.X().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
     m_XboxController.Y().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL  n 
-    m_XboxController.X().OnTrue(m_climber.LowerClimber()); // LOWERS FROM L1 TO FLOOR
+    m_XboxController.A().OnTrue(m_climber.LowerClimber()); // LOWERS FROM L1 TO FLOOR
 }
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand()

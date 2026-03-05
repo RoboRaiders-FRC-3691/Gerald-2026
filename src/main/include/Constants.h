@@ -39,6 +39,7 @@ namespace IntakeConstants {
     inline constexpr units::angle::turn_t kPivotLowerLimit = -0_tr;
 
     inline constexpr int kCanIDRoller = 20;
+    inline constexpr units::turns_per_second_t intakeVelocityConstant = -33_tps;
 
     static constexpr ctre::phoenix6::configs::TalonFXConfiguration KPivotConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(ctre::phoenix6::configs::Slot0Configs{}
@@ -93,9 +94,10 @@ namespace ShooterConstants {
     inline constexpr int kCanIDL = 30;
 
     inline constexpr int kCanIDR = 31;
+    inline constexpr units::turns_per_second_t shooterFlywheelConstant = -65_tps;
 
     inline constexpr int kCanIDFeed = 32;
-    inline constexpr units::turns_per_second_t kShooterFeedSpeed = 0_tps;
+    inline constexpr units::turns_per_second_t feedVelocityConstant = -33_tps;
 
     static constexpr ctre::phoenix6::configs::TalonFXConfiguration KFlywheelL = ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(ctre::phoenix6::configs::Slot0Configs{}
