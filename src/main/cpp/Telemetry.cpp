@@ -5,6 +5,11 @@ using namespace ctre::phoenix6;
 
 Telemetry::Telemetry(units::meters_per_second_t maxSpeed) : MaxSpeed{maxSpeed}
 {
+
+    // ADJUST STARTING PATH
+    SignalLogger::SetPath("/media/sda1/");
+
+
     SignalLogger::Start();
 
     /* Set up the module state Mechanism2d telemetry */

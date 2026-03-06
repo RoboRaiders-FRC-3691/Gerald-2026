@@ -41,7 +41,7 @@ frc2::CommandPtr Intake::SetVel(units::turns_per_second_t vel){
 
 frc2::CommandPtr Intake::RunIntake(){
     return StartEnd([this]{
-        m_RollerMotor.SetControl(m_VelRequest.WithVelocity(intakeVelocityConstant));
+        m_RollerMotor.SetControl(m_VelRequest.WithVelocity(kIntakeVelocityConstant));
     },[this]{
         m_RollerMotor.StopMotor();
     });

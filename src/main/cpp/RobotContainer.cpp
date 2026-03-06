@@ -33,47 +33,40 @@ void RobotContainer::ConfigureBindings()
         }).IgnoringDisable(true)
     );
 
-    joystick.A().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& { return brake; }));
-    joystick.B().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
-        return point.WithModuleDirection(frc::Rotation2d{-joystick.GetLeftY(), -joystick.GetLeftX()});
-    }));
-
+    // joystick.A().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& { return brake; }));
+    // joystick.B().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
+    //     return point.WithModuleDirection(frc::Rotation2d{-joystick.GetLeftY(), -joystick.GetLeftX()});
+    // }));
+  
     // Run SysId routines when holding back/start and X/Y.
     // Note that each routine should be run exactly once in a single log.
-    // (joystick.Back() && joystick.Y()).WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));
-    // (joystick.Back() && joystick.X()).WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kReverse));
-    // (joystick.Start() && joystick.Y()).WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kForward));
-    // (joystick.Start() && joystick.X()).WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kReverse));
+    //(joystick.Back() && joystick.Y()).WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));
+    //(joystick.Back() && joystick.X()).WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kReverse));
+    //(joystick.Start() && joystick.Y()).WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kForward));
+    //(joystick.Start() && joystick.X()).WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kReverse));
 
     // reset the field-centric heading on left bumper press
-    joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
+    //joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
-    m_XboxController.RightTrigger().WhileTrue(m_shooter.RunFlywheel()); // SHOOTS FUEL
+    // ROBOT NORMAL BINDINGS
+    m_XboxController.RightTrigger().OnTrue(m_shooter.RunFlywheel()); // SHOOTS FUEL
+    m_XboxController.RightTrigger().OnFalse(m_shooter.SetFlywheelVel(0_tps)); // Set Flywheel 0 
     m_XboxController.RightBumper().WhileTrue(m_shooter.RunFeed()); // RUNS SHOOTER FEED`
     m_XboxController.LeftTrigger().WhileTrue(m_intake.RunIntake()); // INTAKES FUEL
-    m_XboxController.LeftBumper().OnTrue(m_intake.SetAngle(m_intake.GetPivotMin())); // LOWERS INTAKE
-    m_XboxController.X().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
-    m_XboxController.Y().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL  n 
-    m_XboxController.A().OnTrue(m_climber.LowerClimber()); // LOWERS FROM L1 TO FLOOR
+    m_XboxController.X().OnTrue(m_intake.SetAngle(m_intake.GetPivotMin())); // LOWERS INTAKE
+    m_XboxController.Y().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
+    m_XboxController.POVUp().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL  n 
+    m_XboxController.POVDown().OnTrue(m_climber.LowerClimber()); // LOWERS FROM L1 TO FLOOR
 }
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand()
-{
-    // Simple drive forward auton
-    return frc2::cmd::Sequence(
-        // Reset our field centric heading to match the robot
-        // facing away from our alliance station wall (0 deg).
-        drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(frc::Rotation2d{0_deg}); }),
-        // Then slowly drive forward (away from us) for 5 seconds.
-        drivetrain.ApplyRequest([this]() -> auto&& {
-            return drive.WithVelocityX(0.5_mps)
-                .WithVelocityY(0_mps)
-                .WithRotationalRate(0_tps);
-        })
-        .WithTimeout(5_s),
-        // Finally idle for the rest of auton
-        drivetrain.ApplyRequest([] { return swerve::requests::Idle{}; })
-    );
+void RobotContainer::PathPlannerSetUp(){
+    m_AutoChooser = pathplanner::AutoBuilder::buildAutoChooser();
+
+    frc::SmartDashboard::PutData("Auto Selector", &m_AutoChooser);
+}
+
+frc2::Command* RobotContainer::GetAutonomousCommand(){
+    return m_AutoChooser.GetSelected();
 }

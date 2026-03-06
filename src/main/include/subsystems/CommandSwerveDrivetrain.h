@@ -8,6 +8,12 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/sysid/SysIdRoutine.h>
 
+#include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/config/RobotConfig.h>
+#include <pathplanner/lib/controllers/PPHolonomicDriveController.h>
+#include <frc/geometry/Pose2d.h>
+#include <frc/kinematics/ChassisSpeeds.h>
+
 #include "generated/TunerConstants.h"
 
 #include "Constants.h"
@@ -39,6 +45,8 @@ class CommandSwerveDrivetrain : public frc2::SubsystemBase, public TunerSwerveDr
     static constexpr frc::Rotation2d kRedAlliancePerspectiveRotation{180_deg};
     /* Keep track if we've ever applied the operator perspective before or not */
     bool m_hasAppliedOperatorPerspective = false;
+
+    swerve::requests::ApplyRobotSpeeds m_pathApplyRobotSpeeds;
 
     /* Swerve requests to apply during SysId characterization */
     swerve::requests::SysIdSwerveTranslation m_translationCharacterization;
@@ -115,7 +123,7 @@ class CommandSwerveDrivetrain : public frc2::SubsystemBase, public TunerSwerveDr
     };
 
     /* The SysId routine to test */
-    frc2::sysid::SysIdRoutine *m_sysIdRoutineToApply = &m_sysIdRoutineTranslation;
+    frc2::sysid::SysIdRoutine *m_sysIdRoutineToApply = &m_sysIdRoutineSteer;
 
 public:
     /**
@@ -135,6 +143,7 @@ public:
         if (utils::IsSimulation()) {
             StartSimThread();
         }
+        DrivetrainInit();
     }
 
     /**
@@ -161,6 +170,7 @@ public:
         if (utils::IsSimulation()) {
             StartSimThread();
         }
+        DrivetrainInit();
     }
 
     /**
@@ -194,7 +204,12 @@ public:
         if (utils::IsSimulation()) {
             StartSimThread();
         }
+        DrivetrainInit();
     }
+
+    // Implemented by team 3691
+    // Initialize function that runs regardlesss of which template constructor is used
+    void DrivetrainInit();
 
     /**
      * \brief Returns a command that applies the specified control request to this swerve drivetrain.
@@ -303,7 +318,7 @@ public:
 
     // Implemented by Team 3691
     // Configures Pathplanner (Currently uses defult configs)
-    void ConfigurePathPlanner();
+    void ConfigureAutoBuilder();
 
     // Implemented by Team 3691
     // Adds vision cluseter measurements to the odometry

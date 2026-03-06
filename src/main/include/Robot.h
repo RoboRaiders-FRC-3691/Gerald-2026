@@ -30,7 +30,7 @@ public:
     void TestExit() override;
 
 private:
-    std::optional<frc2::CommandPtr> m_autonomousCommand;
+    std::optional<frc2::Command*> m_autonomousCommand; //This should be OK.
 
     RobotContainer m_container;
 

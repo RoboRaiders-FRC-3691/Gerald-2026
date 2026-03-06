@@ -19,7 +19,6 @@ m_ShooterFeed(kCanIDFeed, kCanBus), m_VelRequestFeed(0_rpm) {
 frc2::CommandPtr Shooter::SetFlywheelVel(units::turns_per_second_t vel){
     return RunOnce([this, vel] {
                 m_FlywheelR.SetControl(m_VelRequestTwo.WithVelocity(vel));
-                //m_ShooterFeed.SetControl(m_VelRequestFeed.WithVelocity(kShooterFeedSpeed));
         });
 }
 
@@ -30,16 +29,12 @@ frc2::CommandPtr Shooter::SetFeedVel(units::turns_per_second_t vel){
 }
 
 frc2::CommandPtr Shooter::RunFlywheel(){
-    return StartEnd([this]{
-        m_FlywheelR.SetControl(m_VelRequestFeed.WithVelocity(shooterFlywheelConstant));
-    },[this]{
-        m_FlywheelR.StopMotor();
-    });
+    return SetFlywheelVel(kShooterFlywheelConstant);
 }
 
 frc2::CommandPtr Shooter::RunFeed(){
     return StartEnd([this]{
-        m_ShooterFeed.SetControl(m_VelRequestFeed.WithVelocity(feedVelocityConstant));
+        m_ShooterFeed.SetControl(m_VelRequestFeed.WithVelocity(kFeedVelocityConstant));
     },[this]{
         m_ShooterFeed.StopMotor();
     });

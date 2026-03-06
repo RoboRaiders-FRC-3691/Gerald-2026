@@ -37,7 +37,9 @@ public:
 
     RobotContainer();
 
-    frc2::CommandPtr GetAutonomousCommand();
+    void PathPlannerSetUp();
+
+    frc2::Command* GetAutonomousCommand();
 
 private:
 
@@ -50,4 +52,6 @@ private:
     Climber m_climber;
 
     void ConfigureBindings();
+
+    frc::SendableChooser<frc2::Command*> m_AutoChooser;
 };
