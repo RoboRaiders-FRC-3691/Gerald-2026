@@ -18,10 +18,11 @@
 
 #include "Constants.h"
 
-#include "Utils/Vision/VisionCluster.h"
-
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "Utils/Widgets/SwerveWidget.h"
+#include <functional>
+#include "Utils/Vision/VisionMeasurement.h"
+#include "Utils/Vision/Logging.h"
 
 using namespace ctre::phoenix6;
 
@@ -321,15 +322,17 @@ public:
     void ConfigureAutoBuilder();
 
     // Implemented by Team 3691
-    // Adds vision cluseter measurements to the odometry
-    void AddClusterVisionMeasurments();
+
+    void UpdateOdometryWithVision();
+    
+    void RegisterVisionCallback (std::function<std::vector<VisionMeasurement>()> callback);
     
 
 private:
     void StartSimThread();
 
-    VisionCluster m_VisionCluster;
-    std::vector<VisionPoseResult> m_VisionResults;
+private:
+    std::function<std::vector<VisionMeasurement>()> m_VisionCallback;
 
     SwerveWidget m_SwerveWidget;
 

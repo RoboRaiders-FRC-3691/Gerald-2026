@@ -13,6 +13,7 @@
 #include "subsystems/Intake.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/Climber.h"
+#include "subsystems/VisionSubsystem.h"
 
 class RobotContainer {
 private:
@@ -50,6 +51,7 @@ private:
     Intake m_intake;
     Shooter m_shooter;
     Climber m_climber;
+    VisionSubsystem m_vision;
 
     void ConfigureBindings();
 

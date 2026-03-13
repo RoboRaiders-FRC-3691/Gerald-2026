@@ -13,12 +13,16 @@
 #include <units/angular_jerk.h>
 #include <units/length.h>
 #include <frc2/command/CommandPtr.h>
+#include <frc/apriltag/AprilTagFields.h>
+#include <frc/apriltag/AprilTagFieldLayout.h>
 
 #include "ctre/phoenix6/TalonFX.hpp"
 #include "ctre/phoenix6/CANcoder.hpp"
 
 #include "ctre/phoenix6/configs/Configurator.hpp"
 #include "ctre/phoenix6/configs/Slot0Configs.hpp"
+
+#include <filesystem>
 
 
 // Define the compound unit type: turns per inch (uses camel case for units name to match units library conventions)
@@ -219,20 +223,24 @@ namespace ClimberConstants {
 
 namespace VisionConstants {
 
+    inline const std::filesystem::path kNodesDirectory = "/VisionNodeConfigs/";
+    inline const frc::AprilTagFieldLayout kTagLayout = frc::AprilTagFieldLayout::LoadField(frc::AprilTagField::kDefaultField);
+
     // Max pose ambiguity (for single tag)
-    static constexpr double kMaxSingleTagAmbiguity = 0.2;
-    static constexpr double kMaxMultiTagAmbiguity = 0.3;
+    inline constexpr double kMaxSingleTagAmbiguity = 0.2;
+    inline constexpr double kMaxMultiTagAmbiguity = 0.3;
 
     // Max distance (for single tag)
-    static constexpr units::inch_t kMaxSingleTagDistance = 150_in;
-    static constexpr units::inch_t kMaxMultiTagDistance = 200_in;
+    inline constexpr units::inch_t kMaxSingleTagDistance = 150_in;
+    inline constexpr units::inch_t kMaxMultiTagDistance = 200_in;
   
     // Default standard deviations 
-    static constexpr wpi::array<double, 3U> kSingleTagStdDevs {3.75, 3.75, 7.5};
-    static constexpr wpi::array<double, 3U> kMultiTagStdDevs {0.75, 0.75, 1.5};
+    inline constexpr wpi::array<double, 3U> kSingleTagStdDevs {3.75, 3.75, 7.5};
+    inline constexpr wpi::array<double, 3U> kMultiTagStdDevs {0.75, 0.75, 1.5};
 
     // Standard deviations scale factor limit (scaled as: distance^2 * kStdDevsScaleFactorLimit/(MaxTagDistance^2))
-    static constexpr double kStdDevsScaleFactorLimit = 1.0 / 30.0;
+    inline constexpr double kStdDevsScaleFactorLimit = 1.0 / 30.0;
 
 }
+
 

@@ -32,7 +32,7 @@ void CommandSwerveDrivetrain::Periodic()
     }
 
 
-    AddClusterVisionMeasurments();
+    UpdateOdometryWithVision();
 
     m_SwerveWidget.Update(SwerveDrivetrain::GetState());
 }
@@ -86,11 +86,32 @@ void CommandSwerveDrivetrain::ConfigureAutoBuilder() {
     );
 }
 
-void CommandSwerveDrivetrain::AddClusterVisionMeasurments(){
-    m_VisionResults = m_VisionCluster.GetVisionEstimates();
-    if(m_VisionResults.size() > 0){
-        for (auto result : m_VisionResults){
-            AddVisionMeasurement(result.visionEstimate.estimatedPose.ToPose2d(), result.visionEstimate.timestamp, result.standardDeviations);
-        }
-    }
+void CommandSwerveDrivetrain::RegisterVisionCallback (std::function<std::vector<VisionMeasurement>()> callback){
+    m_VisionCallback = callback;
+    Logging::Info("[DRIVETRAIN] Vision callback registered successfully. :)");
 }
+
+void CommandSwerveDrivetrain::UpdateOdometryWithVision (){
+
+    if (!m_VisionCallback) {
+
+        // Use a static flag so this only prints once, not every 20ms.
+        static bool warned = false;
+        if (!warned) {
+            Logging::Warn("[DRIVETRAIN] Vision callback NOT found. Odometry will rely solely on encoders/gyro.");
+            warned = true;
+        }
+
+        return;
+    }
+
+    std::vector<VisionMeasurement> visionResults = m_VisionCallback();
+
+    for (const auto& result : visionResults){
+        AddVisionMeasurement(result.estimatedPose, result.timestamp, result.stdDevs);
+    }
+
+    Logging::Debug(fmt::format("[DRIVETRAIN] Applied {} vision measurements to odometry.", 
+             visionResults.size()));
+}
+
