@@ -79,16 +79,16 @@ std::vector<photon::EstimatedRobotPose> VisionNode::GetUnreadMeasurements(){
 
     std::vector<photon::PhotonPipelineResult> cameraResults = m_Camera.GetAllUnreadResults();
          
-    for (auto result : cameraResults){
+    for (auto& result : cameraResults){
         if(result.HasTargets()){
             std::optional<photon::EstimatedRobotPose> pose = m_Estimator.EstimateCoprocMultiTagPose(result);
 
-            if(!pose.has_value()){
+            if(!pose){
                 pose = m_Estimator.EstimateLowestAmbiguityPose(result);
             }
 
-            if(pose.has_value()){
-                robotPositions.push_back(pose.value());
+            if(pose){
+                robotPositions.push_back(*pose);
                 
                 Logging::Debug(fmt::format("[VISION] Position Estimate Generated | Camera: {} | Number of Tags: {} | Estimated Position: {}", 
                     m_Camera.GetCameraName(), 

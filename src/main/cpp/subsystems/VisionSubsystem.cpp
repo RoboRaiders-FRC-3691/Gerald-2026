@@ -29,8 +29,7 @@ std::vector<VisionMeasurement> VisionSubsystem::GetVisionEstimates(){
     return visionEst; 
 }
 
-std::vector<VisionNode> VisionSubsystem::LoadNodesFromDirectory() {
-    std::vector<VisionNode> nodeVect;
+void VisionSubsystem::LoadNodesFromDirectory() {
 
     std::filesystem::path nodeConfigsFullDirectory = frc::filesystem::GetDeployDirectory().append(kNodesDirectory);
 
@@ -38,13 +37,13 @@ std::vector<VisionNode> VisionSubsystem::LoadNodesFromDirectory() {
     if (!std::filesystem::exists(nodeConfigsFullDirectory)) {
         Logging::Error(fmt::format("[VISION] Directory NOT FOUND: {}. No cameras will be loaded.", 
             nodeConfigsFullDirectory.string()));
-        return nodeVect; 
+        return; 
     }
 
     if (!std::filesystem::is_directory(nodeConfigsFullDirectory)) {
         Logging::Error(fmt::format("[VISION] Path {} is not a directory! No cameras will be loaded.", 
             nodeConfigsFullDirectory.string()));
-        return nodeVect;
+        return;
     }
 
     // 2. Iterate through files
@@ -53,7 +52,7 @@ std::vector<VisionNode> VisionSubsystem::LoadNodesFromDirectory() {
     for (const auto& entry : std::filesystem::directory_iterator(nodeConfigsFullDirectory)) {
         if (entry.is_regular_file() && entry.path().extension() == ".json") {
             try {
-                nodeVect.push_back(VisionNode::FromFile(entry.path(), kTagLayout));
+                m_Nodes.push_back(VisionNode::FromFile(entry.path(), kTagLayout));
             } catch (const std::exception& e) {
                 // If one camera file is corrupt, we log it and keep trying the others
                 Logging::Error(fmt::format("[VISION] Failed to load node from {}: {}", 
@@ -63,13 +62,11 @@ std::vector<VisionNode> VisionSubsystem::LoadNodesFromDirectory() {
     }
 
     // 3. Final Summary
-    if (nodeVect.empty()) {
+    if (m_Nodes.empty()) {
         Logging::Warn("[VISION] Directory scan complete: 0 vision nodes created. Check file extensions and internal formatting!");
     } else {
-        Logging::Info(fmt::format("[VISION] Successfully initialized {} camera nodes.", nodeVect.size()));
+        Logging::Info(fmt::format("[VISION] Successfully initialized {} camera nodes.", m_Nodes.size()));
     }
-
-    return nodeVect;
 }
 
 std::optional<VisionMeasurement> VisionSubsystem::FilterVisionEstimate(photon::EstimatedRobotPose estimatedRobotPosition){

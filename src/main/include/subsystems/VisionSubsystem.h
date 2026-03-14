@@ -18,7 +18,7 @@ public:
     std::vector<VisionMeasurement> GetVisionEstimates();
 
 private:
-    std::vector<VisionNode> LoadNodesFromDirectory();
+    void LoadNodesFromDirectory();
 
     std::optional<VisionMeasurement> FilterVisionEstimate(photon::EstimatedRobotPose estimatedRobotPosition);
 
