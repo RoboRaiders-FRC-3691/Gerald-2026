@@ -56,6 +56,7 @@ void RobotContainer::ConfigureBindings()
     m_XboxController.RightTrigger().OnFalse(m_shooter.SetFlywheelVel(0_tps)); // Set Flywheel 0 
     m_XboxController.RightBumper().WhileTrue(m_shooter.RunFeed()); // RUNS SHOOTER FEED`
     m_XboxController.LeftTrigger().WhileTrue(m_intake.RunIntake()); // INTAKES FUEL
+    m_XboxController.LeftBumper().WhileTrue(m_intake.RunIntakeReverse()); // SPITS OUT FUEL FROM INTAKE
     m_XboxController.X().OnTrue(m_intake.SetAngle(m_intake.GetPivotMin())); // LOWERS INTAKE
     m_XboxController.Y().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
     m_XboxController.POVUp().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL  n 
@@ -63,6 +64,9 @@ void RobotContainer::ConfigureBindings()
 }
 
 void RobotContainer::PathPlannerSetUp(){
+
+    pathplanner::NamedCommands::registerCommand("Shoot Starting Fuel", m_shooter.ShootFor(ShooterConstants::kTimeToShootStartFuel));
+    //pathplanner::NamedCommands::registerCommand("Climb", m_climber.RaiseClimber;
     m_AutoChooser = pathplanner::AutoBuilder::buildAutoChooser();
 
     frc::SmartDashboard::PutData("Auto Selector", &m_AutoChooser);

@@ -5,9 +5,13 @@
 #pragma once
 
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/Commands.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "Telemetry.h"
+
+#include <pathplanner/lib/commands/PathPlannerAuto.h>
+#include <pathplanner/lib/auto/NamedCommands.h>
 
 #include "Constants.h"
 #include "subsystems/Intake.h"

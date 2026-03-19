@@ -7,10 +7,10 @@ Telemetry::Telemetry(units::meters_per_second_t maxSpeed) : MaxSpeed{maxSpeed}
 {
 
     // ADJUST STARTING PATH
-    SignalLogger::SetPath("/media/sda1/");
+    //SignalLogger::SetPath("/media/sda1/");
 
 
-    SignalLogger::Start();
+    //SignalLogger::Start();
 
     /* Set up the module state Mechanism2d telemetry */
     for (size_t i = 0; i < m_moduleSpeeds.size(); ++i) {
