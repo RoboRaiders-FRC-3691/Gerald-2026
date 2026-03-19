@@ -9,7 +9,7 @@
 
 RobotContainer::RobotContainer()
 {
-    PathPlannerSetUp();
+    drivetrain.RegisterVisionCallback([this] { return m_vision.GetVisionEstimates(); });
     ConfigureBindings();
 }
 

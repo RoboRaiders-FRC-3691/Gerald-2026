@@ -1,0 +1,15 @@
+{
+    "CameraName": "Front Camera Team 3691", 
+    "PoseStrategy": "MULTI_TAG_PNP_ON_COPROCESSOR",
+
+    "PositionOffset": {
+        "X": 1.75, 
+        "Y": 0.25,
+        "Z": 20,
+
+        "Pitch": 26.5,
+        "Roll": 0.3,
+        "Yaw": 0
+    }
+
+}
