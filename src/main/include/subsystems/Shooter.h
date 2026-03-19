@@ -6,13 +6,14 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/Command.h>
+#include <frc2/command/Commands.h>
 #include <frc2/command/CommandPtr.h>
 
 #include <ctre/phoenix6/controls/Follower.hpp>
 
-#include "Constants.h"
-
 #include <ctre/phoenix6/CANBus.hpp>
+
+#include "Constants.h"
 
 class Shooter : public frc2::SubsystemBase {
  public:
@@ -30,22 +31,26 @@ class Shooter : public frc2::SubsystemBase {
 
   frc2::CommandPtr RunFeed();
 
-  units::turns_per_second_t GetFlywheelVel();
+  frc2::CommandPtr ShootFor(units::time::second_t duration);
+
+  ctre::phoenix6::StatusSignal<units::angular_velocity::turns_per_second_t> GetFlywheelVel();
+
+  bool FlywheelTargetVelocityReached();
 
   ////////   FLAP
 
   //Flap (rotates to angle the fuel) Units: Turns
 
-  frc2::CommandPtr SetFlapPosition(units::angle::turn_t position);
+  // frc2::CommandPtr SetFlapPosition(units::angle::turn_t position);
 
-  units::angle::turn_t GetFlapPosition();
+  // units::angle::turn_t GetFlapPosition();
 
 
   
   //Will be called periodically whenever the CommandScheduler runs.
   void Periodic() override;
 
- private:
+  private:
 
 
   ctre::phoenix6::hardware::TalonFX m_FlywheelL;

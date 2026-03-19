@@ -40,10 +40,42 @@ frc2::CommandPtr Shooter::RunFeed(){
     });
 }
 
-units::angular_velocity::turns_per_second_t Shooter::GetFlywheelVel(){
-    return m_FlywheelR.GetVelocity().GetValue();
+// frc2::CommandPtr Shooter::ShootFor(units::time::second_t duration){
+//     using frc2::cmd::WaitUntil;
+//     using frc2::cmd::Wait;
+
+//     return SetFlywheelVel(kShooterFlywheelConstant).AndThen(
+//            WaitUntil([this] { return FlywheelTargetVelocityReached(); })).AndThen(
+//            SetFeedVel(kFeedVelocityConstant)).AndThen(
+//            Wait(duration)).AndThen(
+//            SetFlywheelVel(0_tps).AlongWith(SetFeedVel(0_tps)));
+// }
+
+frc2::CommandPtr Shooter::ShootFor(units::time::second_t duration){
+    using frc2::cmd::WaitUntil;
+    using frc2::cmd::Wait;
+
+    frc2::CommandPtr command = frc2::cmd::Sequence(
+        SetFlywheelVel(kShooterFlywheelConstant),
+        WaitUntil([this] { return FlywheelTargetVelocityReached(); }),
+        SetFeedVel(kFeedVelocityConstant),
+        Wait(duration),
+        SetFlywheelVel(0_tps),
+        SetFeedVel(0_tps)
+    );
+
+    return command;
+}
+
+ctre::phoenix6::StatusSignal<units::angular_velocity::turns_per_second_t> Shooter::GetFlywheelVel(){
+    return m_FlywheelR.GetVelocity();
+}
+
+bool Shooter::FlywheelTargetVelocityReached(){
+    return GetFlywheelVel().IsNear(kShooterFlywheelConstant, kShooterFlywheelTolerance); 
 }
 
 
 // This method will be called once per scheduler run
 void Shooter::Periodic() {}
+

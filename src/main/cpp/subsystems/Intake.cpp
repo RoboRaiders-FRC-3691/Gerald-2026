@@ -47,6 +47,14 @@ frc2::CommandPtr Intake::RunIntake(){
     });
 }
 
+frc2::CommandPtr Intake::RunIntakeReverse(){
+  return StartEnd([this]{
+      m_RollerMotor.SetControl(m_VelRequest.WithVelocity(-kIntakeVelocityConstant));
+  },[this]{
+      m_RollerMotor.StopMotor();
+  });
+}
+
 units::angular_velocity::turns_per_second_t Intake::GetSpeedRollerMotor(){
   return m_PivotMotor.GetVelocity().GetValue();
 }

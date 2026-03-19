@@ -8,6 +8,7 @@ using namespace subsystems;
 
 void CommandSwerveDrivetrain::DrivetrainInit(){
     frc::SmartDashboard::PutData("Swerve Widget", &m_SwerveWidget);
+    ConfigureAutoBuilder();
 }
 
 void CommandSwerveDrivetrain::Periodic()
