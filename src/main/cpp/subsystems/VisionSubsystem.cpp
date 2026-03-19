@@ -16,12 +16,14 @@ std::vector<VisionMeasurement> VisionSubsystem::GetVisionEstimates(){
 
     for (auto& node : m_Nodes){
         //Loop through each estimated position returned from the Update() method
-        for (auto position : node.GetUnreadMeasurements()){
+
+        auto nodeResults = node.GetUnreadMeasurements();
+        for (auto& position : nodeResults){
 
             auto filteredEstimate = FilterVisionEstimate(position);
 
-            if(filteredEstimate.has_value()){
-                visionEst.push_back(filteredEstimate.value());
+            if(filteredEstimate){
+                visionEst.push_back(*filteredEstimate);
             }
         }
     }
@@ -79,7 +81,7 @@ std::optional<VisionMeasurement> VisionSubsystem::FilterVisionEstimate(photon::E
                         
         unsigned int numTargets = estimatedRobotPosition.targetsUsed.size();
 
-        // extra statement to ensure we never divide by zero. Shouldnt be a problem as positions shouldnt be estimated without any targets.
+        //extra statement to ensure we never divide by zero. Shouldnt be a problem as positions shouldnt be estimated without any targets.
         if (numTargets == 0) {
             return std::nullopt;
         }
@@ -92,26 +94,34 @@ std::optional<VisionMeasurement> VisionSubsystem::FilterVisionEstimate(photon::E
         avgDistance /= numTargets;
         avgAmbiguity /= numTargets;
 
-        bool accepted = false;
-
-        if(numTargets > 1 && avgAmbiguity <= kMaxMultiTagAmbiguity && avgDistance <= kMaxMultiTagDistance) {
+        if(numTargets > 1 && avgAmbiguity <= kMaxMultiTagAmbiguity && avgDistance <= kMaxMultiTagDistance){
             stdDevs = kMultiTagStdDevs;
-            accepted = true;
-        } 
-        else if(numTargets == 1 && avgAmbiguity <= kMaxSingleTagAmbiguity && avgDistance <= kMaxSingleTagDistance) {
-            stdDevs = kSingleTagStdDevs;
-            accepted = true;
-        }
 
-        if (accepted) {
+            // Scale standard deviations // NOTE: CHECK CALCULATION FOR MULTI TAG
             double scaleFactor = (pow(avgDistance.value(), 2) * (kStdDevsScaleFactorLimit/pow(kMaxSingleTagDistance.value(), 2)));
-            for(double& stdDev : stdDevs) { stdDev *= scaleFactor; }
+            for(double& stdDev : stdDevs){
+                stdDev *= scaleFactor;
+            }
+        }
+        else if(numTargets == 1 && avgAmbiguity <= kMaxSingleTagAmbiguity && avgDistance <= kMaxSingleTagDistance){
+            stdDevs = kSingleTagStdDevs;
 
-            return VisionMeasurement {estimatedRobotPosition.estimatedPose.ToPose2d(), estimatedRobotPosition.timestamp, stdDevs};
-        } else {
-            Logging::Debug(fmt::format("[VISION] Filter Rejected Estimate | Tags: {} | AvgDist: {:.1f}in | AvgAmbiguity: {:.2f}", 
-                numTargets, avgDistance.value(), avgAmbiguity));
-            
+            // Scale standard deviations
+            double scaleFactor = (pow(avgDistance.value(), 2) * (kStdDevsScaleFactorLimit/pow(kMaxSingleTagDistance.value(), 2)));
+            for(double& stdDev : stdDevs){
+                stdDev *= scaleFactor;
+            }
+        }
+        else {
+            // Discard pose estimation otherwise
             return std::nullopt;
         }
+
+        return VisionMeasurement {estimatedRobotPosition.estimatedPose.ToPose2d(), estimatedRobotPosition.timestamp, stdDevs};
+        
+        // TODO ADD LOGGING BACK IN
+        // Logging::Debug(fmt::format("[VISION] Filter Rejected Estimate | Tags: {} | AvgDist: {:.1f}in | AvgAmbiguity: {:.2f}", 
+        //     numTargets, avgDistance.value(), avgAmbiguity));
+            
+    
 }

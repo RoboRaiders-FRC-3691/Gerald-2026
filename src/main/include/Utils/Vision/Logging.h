@@ -14,7 +14,7 @@
 // NOTE: if constexpr is used to strip debug logs at compile-time for performance while maintaining clarity.
 
 namespace Logging {
-    
+    // Logging debug flag confused?
     // kIsDebugMode bool present for clarity. Minimal overhead overlooked.
     inline constexpr bool kIsDebugMode = 
     #ifndef NDEBUG

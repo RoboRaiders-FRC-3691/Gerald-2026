@@ -36,5 +36,5 @@ class VisionNode {
         photon::PhotonCamera m_Camera;
         photon::PhotonPoseEstimator m_Estimator;
 
-        bool m_ConnectionStatus;
+        //bool m_ConnectionStatus;
 };

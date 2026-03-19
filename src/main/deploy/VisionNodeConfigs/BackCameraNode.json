@@ -1,5 +1,5 @@
 {
-    "CameraName": "Back_Camera_Team_3691", 
+    "CameraName": "Back Camera Team 3691", 
     "PoseStrategy": "MULTI_TAG_PNP_ON_COPROCESSOR",
 
     "PositionOffset": {

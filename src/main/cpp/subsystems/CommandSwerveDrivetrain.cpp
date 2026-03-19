@@ -107,11 +107,12 @@ void CommandSwerveDrivetrain::UpdateOdometryWithVision (){
 
     std::vector<VisionMeasurement> visionResults = m_VisionCallback();
 
-    for (const auto& result : visionResults){
+    for (auto& result : visionResults){
         AddVisionMeasurement(result.estimatedPose, result.timestamp, result.stdDevs);
     }
 
-    Logging::Debug(fmt::format("[DRIVETRAIN] Applied {} vision measurements to odometry.", 
-             visionResults.size()));
+    // ADD BACK AFTER DEBUG LOGGING FLAG FIXED
+    // Logging::Debug(fmt::format("[DRIVETRAIN] Applied {} vision measurements to odometry.", 
+    //           visionResults.size()));
 }
 

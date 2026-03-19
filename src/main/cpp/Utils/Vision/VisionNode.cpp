@@ -1,7 +1,7 @@
 #include "Utils/Vision/VisionNode.h"
 
 VisionNode::VisionNode(std::string cameraName, frc::Transform3d robotToCam, frc::AprilTagFieldLayout tagLayout)
-                       : m_Camera(cameraName), m_Estimator(tagLayout, robotToCam), m_ConnectionStatus(true){}
+                       : m_Camera(cameraName), m_Estimator(tagLayout, robotToCam){}
 
 VisionNode VisionNode::FromFile(std::filesystem::path filepath, frc::AprilTagFieldLayout aprilTags){
     std::string fileName = filepath.filename().string();
@@ -59,23 +59,27 @@ std::vector<photon::EstimatedRobotPose> VisionNode::GetUnreadMeasurements(){
 
     std::vector<photon::EstimatedRobotPose> robotPositions;
     
-    bool currentlyConnected = m_Camera.IsConnected();
 
-    // State Change: Connected -> Disconnected
-    if (!currentlyConnected && m_ConnectionStatus) {
-        Logging::Warn(fmt::format("[VISION] Camera '{}' DISCONNECTED! Check power/ethernet.", m_Camera.GetCameraName()));
-        m_ConnectionStatus = false;
-    } 
-    // State Change: Disconnected -> Connected
-    else if (currentlyConnected && !m_ConnectionStatus) {
-        Logging::Info(fmt::format("[VISION] Camera '{}' RECONNECTED. Systems nominal.", m_Camera.GetCameraName()));
-        m_ConnectionStatus = true;
-    }
 
-    if (!currentlyConnected) {
-        Logging::Debug(fmt::format("[VISION] Camera {} - Disconnected, returning early.", m_Camera.GetCameraName()));
-        return robotPositions;
-    }
+    // Camera connection status monitoring not working. Potentially fix later for easier debugging.
+    // bool currentlyConnected = m_Camera.IsConnected();
+
+
+    // // State Change: Connected -> Disconnected
+    // if (!currentlyConnected && m_ConnectionStatus) {
+    //     Logging::Warn(fmt::format("[VISION] Camera '{}' DISCONNECTED! Check power/ethernet.", m_Camera.GetCameraName()));
+    //     m_ConnectionStatus = false;
+    // } 
+    // // State Change: Disconnected -> Connected
+    // else if (currentlyConnected && !m_ConnectionStatus) {
+    //     Logging::Info(fmt::format("[VISION] Camera '{}' RECONNECTED. Systems nominal.", m_Camera.GetCameraName()));
+    //     m_ConnectionStatus = true;
+    // }
+
+    // if (!currentlyConnected) {
+    //     Logging::Debug(fmt::format("[VISION] Camera {} - Disconnected, returning early.", m_Camera.GetCameraName()));
+    //     return robotPositions;
+    // }
 
     std::vector<photon::PhotonPipelineResult> cameraResults = m_Camera.GetAllUnreadResults();
          
@@ -90,11 +94,12 @@ std::vector<photon::EstimatedRobotPose> VisionNode::GetUnreadMeasurements(){
             if(pose){
                 robotPositions.push_back(*pose);
                 
-                Logging::Debug(fmt::format("[VISION] Position Estimate Generated | Camera: {} | Number of Tags: {} | Estimated Position: {}", 
+                /*Logging::Debug(fmt::format("[VISION] Position Estimate Generated | Camera: {} | Number of Tags: {} | Estimated Position: {}", 
                     m_Camera.GetCameraName(), 
                     pose->targetsUsed.size(),
                     Logging::Pose2dToCustomaryString(pose->estimatedPose.ToPose2d())
                 ));
+                */
             }
             
         }
