@@ -217,7 +217,7 @@ namespace ClimberConstants {
             .WithMotionMagicJerk(2500_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
-            .WithSensorToMechanismRatio(15)
+            .WithSensorToMechanismRatio(12)
         );
 
 
