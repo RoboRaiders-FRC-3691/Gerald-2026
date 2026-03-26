@@ -3,11 +3,11 @@
     "PoseStrategy": "MULTI_TAG_PNP_ON_COPROCESSOR",
 
     "PositionOffset": {
-        "X": 1.75, 
-        "Y": 0.25,
-        "Z": 20,
+        "X": -9.125,
+        "Y": 10.25,
+        "Z": 20.125,
 
-        "Pitch": 26.5,
+        "Pitch": 16,
         "Roll": 0.3,
         "Yaw": 0
     }

@@ -40,16 +40,6 @@ frc2::CommandPtr Shooter::RunFeed(){
     });
 }
 
-// frc2::CommandPtr Shooter::ShootFor(units::time::second_t duration){
-//     using frc2::cmd::WaitUntil;
-//     using frc2::cmd::Wait;
-
-//     return SetFlywheelVel(kShooterFlywheelConstant).AndThen(
-//            WaitUntil([this] { return FlywheelTargetVelocityReached(); })).AndThen(
-//            SetFeedVel(kFeedVelocityConstant)).AndThen(
-//            Wait(duration)).AndThen(
-//            SetFlywheelVel(0_tps).AlongWith(SetFeedVel(0_tps)));
-// }
 
 frc2::CommandPtr Shooter::ShootFor(units::time::second_t duration){
     using frc2::cmd::WaitUntil;

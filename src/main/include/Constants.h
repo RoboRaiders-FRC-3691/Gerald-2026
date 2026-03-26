@@ -46,7 +46,7 @@ namespace IntakeConstants {
     inline constexpr units::angle::turn_t kPivotLowerLimit = 0_tr;
 
     inline constexpr int kCanIDRoller = 20;
-    inline constexpr units::turns_per_second_t kIntakeVelocityConstant = -60_tps;
+    inline constexpr units::turns_per_second_t kIntakeVelocityConstant = -80_tps;
 
     static constexpr ctre::phoenix6::configs::CANcoderConfiguration kIntakeCANCoderConfigs = ctre::phoenix6::configs::CANcoderConfiguration{}
         .WithMagnetSensor(ctre::phoenix6::configs::MagnetSensorConfigs{}
@@ -233,8 +233,8 @@ namespace VisionConstants {
     inline constexpr double kMaxMultiTagAmbiguity = 0.3;
 
     // Max distance (for single tag)
-    inline constexpr units::inch_t kMaxSingleTagDistance = 150_in;
-    inline constexpr units::inch_t kMaxMultiTagDistance = 200_in;
+    inline constexpr units::inch_t kMaxSingleTagDistance = 60_in;
+    inline constexpr units::inch_t kMaxMultiTagDistance = 77.625_in;
   
     // Default standard deviations 
     inline constexpr wpi::array<double, 3U> kSingleTagStdDevs {3.75, 3.75, 7.5};

@@ -12,6 +12,7 @@
 #include "Constants.h"
 
 #include <ctre/phoenix6/CANBus.hpp>
+#include <ctre/phoenix6/TalonFX.hpp>
 
 class Intake : public frc2::SubsystemBase {
  public:
@@ -19,13 +20,13 @@ class Intake : public frc2::SubsystemBase {
 
   void Periodic() override;
 
-  frc2::CommandPtr SetAngle(units::turn_t turns);
+  frc2::CommandPtr SetAngle(units::angle::turn_t turns);
+
+  frc2::CommandPtr DropIntake();
+
+  frc2::CommandPtr RaiseIntake();
 
   units::turn_t GetAnglePivotMotor();
-
-  units::turn_t GetPivotMax();
-
-  units::turn_t GetPivotMin();
 
   frc2::CommandPtr SetVel(units::turns_per_second_t vel);
 
@@ -45,5 +46,5 @@ class Intake : public frc2::SubsystemBase {
   ctre::phoenix6::controls::MotionMagicVoltage m_PoseRequest;
 
   ctre::phoenix6::hardware::TalonFX m_RollerMotor;
-  ctre::phoenix6::controls::MotionMagicVelocityTorqueCurrentFOC m_VelRequest;
+  ctre::phoenix6::controls::MotionMagicVelocityVoltage m_VelRequest;
 };

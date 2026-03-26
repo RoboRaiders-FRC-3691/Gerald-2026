@@ -13,7 +13,7 @@ m_RollerMotor(kCanIDRoller, kCanBus), m_VelRequest(0_rpm) {
     m_RollerMotor.GetConfigurator().Apply(KRollerConfigs);
 }
 
-frc2::CommandPtr Intake::SetAngle(units::turn_t pos){
+frc2::CommandPtr Intake::SetAngle(units::angle::turn_t pos){
       return RunOnce([this, pos] {
            if(IsValidPosition(pos)){
                   m_PivotMotor.SetControl(m_PoseRequest.WithPosition(pos));
@@ -21,21 +21,25 @@ frc2::CommandPtr Intake::SetAngle(units::turn_t pos){
   });
 }
 
+frc2::CommandPtr Intake::DropIntake(){
+      return RunOnce([this] {
+           SetAngle(kPivotLowerLimit);
+  });
+}
+
+frc2::CommandPtr Intake::RaiseIntake(){
+      return RunOnce([this] {
+           SetAngle(kPivotUpperLimit);
+  });
+}
+
 units::turn_t Intake::GetAnglePivotMotor(){
   return m_PivotMotor.GetPosition().GetValue();
 }
 
-units::turn_t Intake::GetPivotMax(){
-  return  kPivotUpperLimit;
-}
-
-units::turn_t Intake::GetPivotMin(){
-  return  kPivotLowerLimit;
-}
-
 frc2::CommandPtr Intake::SetVel(units::turns_per_second_t vel){
       return RunOnce([this, vel] {
-          m_RollerMotor.SetControl(m_VelRequest.WithVelocity(vel));
+          m_RollerMotor.SetControl(m_VelRequest.WithVelocity(vel).WithEnableFOC(true));
   });
 }
 

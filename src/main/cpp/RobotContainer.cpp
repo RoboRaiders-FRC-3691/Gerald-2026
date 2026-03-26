@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+  // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -9,7 +9,6 @@
 
 RobotContainer::RobotContainer()
 {
-    drivetrain.RegisterVisionCallback([this] { return m_vision.GetVisionEstimates(); });
     PathPlannerSetUp();
     ConfigureBindings();
 }
@@ -58,15 +57,16 @@ void RobotContainer::ConfigureBindings()
     m_XboxController.RightBumper().WhileTrue(m_shooter.RunFeed()); // RUNS SHOOTER FEED`
     m_XboxController.LeftTrigger().WhileTrue(m_intake.RunIntake()); // INTAKES FUEL
     m_XboxController.LeftBumper().WhileTrue(m_intake.RunIntakeReverse()); // SPITS OUT FUEL FROM INTAKE
-    m_XboxController.X().OnTrue(m_intake.SetAngle(m_intake.GetPivotMin())); // LOWERS INTAKE
-    m_XboxController.Y().OnTrue(m_intake.SetAngle(m_intake.GetPivotMax())); // RAISES INTAKE
-    m_XboxController.POVUp().OnTrue(m_climber.RaiseClimber()); // CLIMBS UP A LEVEL  n 
-    m_XboxController.POVDown().OnTrue(m_climber.LowerClimber()); // LOWERS FROM L1 TO FLOOR
+    m_XboxController.X().OnTrue(m_intake.DropIntake()); // LOWERS INTAKE
+    m_XboxController.Y().OnTrue(m_intake.RaiseIntake()); // RAISES INTAKE
+    m_XboxController.POVUp().OnTrue(m_climber.RaiseClimber()); // RAISES CLIMBER 
+    m_XboxController.POVDown().OnTrue(m_climber.LowerClimber()); // LOWERS CLIMBER
 }
 
 void RobotContainer::PathPlannerSetUp(){
 
     pathplanner::NamedCommands::registerCommand("Shoot Starting Fuel", m_shooter.ShootFor(ShooterConstants::kTimeToShootStartFuel));
+    pathplanner::NamedCommands::registerCommand("Drop Intake", m_intake.DropIntake());
     //pathplanner::NamedCommands::registerCommand("Climb", m_climber.RaiseClimber;
     m_AutoChooser = pathplanner::AutoBuilder::buildAutoChooser();
 
