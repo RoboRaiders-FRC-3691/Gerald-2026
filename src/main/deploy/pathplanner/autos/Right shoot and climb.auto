@@ -1,0 +1,37 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "right side to shooting pos"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot Starting Fuel"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right side shoot to climb line up"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "climb lineup"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

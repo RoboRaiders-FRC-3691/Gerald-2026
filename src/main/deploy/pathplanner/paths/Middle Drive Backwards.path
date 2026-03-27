@@ -4,28 +4,28 @@
     {
       "anchor": {
         "x": 3.5,
-        "y": 4.037
+        "y": 4.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.1486239620403325,
-        "y": 4.029620403321471
+        "x": 3.148546477469109,
+        "y": 4.0
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.526,
-        "y": 4.037
+        "x": 2.8,
+        "y": 4.0
       },
       "prevControl": {
-        "x": 3.0517912218268095,
-        "y": 4.018861209964412
+        "x": 3.326104005548413,
+        "y": 4.0
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "MiddleDriveBackwordsEndPoint"
     }
   ],
   "rotationTargets": [],

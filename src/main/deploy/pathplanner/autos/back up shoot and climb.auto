@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle Drive Backwards"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Drop Intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot Starting Fuel"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle back up to climber line up"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "climb lineup"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
