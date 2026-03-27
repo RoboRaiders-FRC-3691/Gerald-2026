@@ -5,21 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "Middle Drive Backwards"
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "Drop Intake"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shoot Starting Fuel"
           }
         }
       ]

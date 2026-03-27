@@ -22,16 +22,14 @@ frc2::CommandPtr Intake::SetAngle(units::angle::turn_t pos){
 }
 
 frc2::CommandPtr Intake::DropIntake(){
-      return RunOnce([this] {
-           SetAngle(kPivotLowerLimit);
-  });
-}
+      return SetAngle(kPivotLowerLimit);
+  };
+
 
 frc2::CommandPtr Intake::RaiseIntake(){
-      return RunOnce([this] {
-           SetAngle(kPivotUpperLimit);
-  });
-}
+      return SetAngle(kPivotUpperLimit);
+  };
+
 
 units::turn_t Intake::GetAnglePivotMotor(){
   return m_PivotMotor.GetPosition().GetValue();

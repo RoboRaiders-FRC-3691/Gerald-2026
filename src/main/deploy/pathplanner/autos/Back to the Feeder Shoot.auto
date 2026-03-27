@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Drop Intake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Back to the Feeder"
