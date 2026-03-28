@@ -13,6 +13,12 @@
         {
           "type": "named",
           "data": {
+            "name": "Drop Intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "Shoot Starting Fuel"
           }
         },
@@ -26,6 +32,12 @@
           "type": "path",
           "data": {
             "pathName": "climb lineup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Raise Intake"
           }
         }
       ]

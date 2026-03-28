@@ -33,6 +33,12 @@
           "data": {
             "pathName": "climb lineup"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Raise Intake"
+          }
         }
       ]
     }
