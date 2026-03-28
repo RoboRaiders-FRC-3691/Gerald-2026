@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Middle Drive Backwards"
+            "pathName": "left side to shooting pos"
           }
         },
         {
@@ -25,13 +25,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Middle back up to climber line up"
+            "pathName": "left shoot to left climb start"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": " right side climb lineup"
+            "pathName": "left side climb line up"
           }
         },
         {

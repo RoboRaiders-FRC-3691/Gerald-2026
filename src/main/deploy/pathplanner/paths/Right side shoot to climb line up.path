@@ -9,7 +9,7 @@
       "prevControl": null,
       "nextControl": {
         "x": 1.1019828815977173,
-        "y": 1.6866333808844514
+        "y": 1.6866333808844516
       },
       "isLocked": false,
       "linkedName": "right side shooting pos"
@@ -45,7 +45,7 @@
     "rotation": -90.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "right side",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 34.777
