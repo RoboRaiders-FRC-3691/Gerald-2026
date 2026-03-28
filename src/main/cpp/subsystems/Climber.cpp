@@ -7,8 +7,8 @@
 using namespace ClimberConstants;
 
 Climber::Climber(): 
-m_MiddleClimber(kCanIDOne, kCanBus), m_PoseRequest(0_tr){
-    m_MiddleClimber.GetConfigurator().Apply(KMotorOneConfigs);
+m_MiddleClimber(kCanIDClimber, kCanBus), m_PoseRequest(0_tr){
+    m_MiddleClimber.GetConfigurator().Apply(KClimberConfigs);
 };
 
 units::angle::turn_t Climber::GetMiddleClimberPosition()
@@ -17,11 +17,11 @@ units::angle::turn_t Climber::GetMiddleClimberPosition()
 };
 
 frc2::CommandPtr Climber::LowerClimber(){
-          return SetClimberPosition(kPivotLowerLimit);
+          return SetClimberPosition(kClimberLowerLimit);
 };
 
 frc2::CommandPtr Climber::RaiseClimber(){
-          return SetClimberPosition(kPivotUpperLimit);
+          return SetClimberPosition(kClimberUpperLimit);
 };
 
 
@@ -40,7 +40,7 @@ frc2::CommandPtr Climber::SetClimberPosition(units::length::inch_t pos){
 };
 
 bool Climber::IsValidPosition(units::length::inch_t pos) {
-     return (pos>=kPivotLowerLimit && pos<=kPivotUpperLimit);
+     return (pos>=kClimberLowerLimit && pos<=kClimberUpperLimit);
 }
 
 frc2::CommandPtr Climber::Climb(){

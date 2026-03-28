@@ -190,15 +190,15 @@ namespace ShooterConstants {
 namespace ClimberConstants {
     inline constexpr ctre::phoenix6::CANBus kCanBus{"*"};
 
-    inline constexpr int kCanIDOne = 40;
-    inline constexpr units::length::inch_t kPivotUpperLimit = 9.25_in;
-    inline constexpr units::length::inch_t kPivotLowerLimit = 0.25_in;
+    inline constexpr int kCanIDClimber = 40;
+    inline constexpr units::length::inch_t kClimberUpperLimit = 9.25_in;
+    inline constexpr units::length::inch_t kClimberLowerLimit = 0.25_in;
 
 
     inline constexpr units::unit_t<turns_per_inch> kTurnsPerInch{0.324966};
 
 
-    static constexpr ctre::phoenix6::configs::TalonFXConfiguration KMotorOneConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
+    static constexpr ctre::phoenix6::configs::TalonFXConfiguration KClimberConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(ctre::phoenix6::configs::Slot0Configs{}
             .WithKS(.12)
             .WithKV(.2)
