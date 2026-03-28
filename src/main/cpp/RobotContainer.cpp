@@ -69,7 +69,8 @@ void RobotContainer::PathPlannerSetUp(){
     pathplanner::NamedCommands::registerCommand("Shoot Starting Fuel", m_shooter.ShootFor(ShooterConstants::kTimeToShootStartFuel));
     pathplanner::NamedCommands::registerCommand("Drop Intake", m_intake.DropIntake());
     pathplanner::NamedCommands::registerCommand("Raise Intake", m_intake.RaiseIntake());
-    //pathplanner::NamedCommands::registerCommand("Climb", m_climber.RaiseClimber;
+    pathplanner::NamedCommands::registerCommand("Climb", m_climber.Climb());
+    
     m_AutoChooser = pathplanner::AutoBuilder::buildAutoChooser();
 
     frc::SmartDashboard::PutData("Auto Selector", &m_AutoChooser);

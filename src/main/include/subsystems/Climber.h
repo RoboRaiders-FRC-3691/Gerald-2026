@@ -6,7 +6,10 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/Command.h>
+#include <frc2/command/Commands.h>
 #include <frc2/command/CommandPtr.h>
+
+#include <ctre/phoenix6/controls/Follower.hpp>
 
 #include "Constants.h"
 
@@ -28,6 +31,7 @@ public:
 
    frc2::CommandPtr RaiseClimber();
 
+   frc2::CommandPtr Climb();
    
    void Periodic() override;
 

@@ -42,3 +42,12 @@ frc2::CommandPtr Climber::SetClimberPosition(units::length::inch_t pos){
 bool Climber::IsValidPosition(units::length::inch_t pos) {
      return (pos>=kPivotLowerLimit && pos<=kPivotUpperLimit);
 }
+
+frc2::CommandPtr Climber::Climb(){
+    frc2::CommandPtr command = frc2::cmd::Sequence(
+          RaiseClimber(),
+          LowerClimber()      
+    );
+
+    return command;
+}
