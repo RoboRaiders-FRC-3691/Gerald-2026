@@ -46,7 +46,7 @@ namespace IntakeConstants {
     inline constexpr units::angle::turn_t kPivotLowerLimit = 0_tr;
 
     inline constexpr int kCanIDRoller = 20;
-    inline constexpr units::turns_per_second_t kIntakeVelocityConstant = -80_tps;
+    inline constexpr units::turns_per_second_t kIntakeVelocityConstant = 80_tps;
 
     static constexpr ctre::phoenix6::configs::CANcoderConfiguration kIntakeCANCoderConfigs = ctre::phoenix6::configs::CANcoderConfiguration{}
         .WithMagnetSensor(ctre::phoenix6::configs::MagnetSensorConfigs{}
@@ -98,6 +98,9 @@ namespace IntakeConstants {
             .WithMotionMagicCruiseVelocity(80_tps)
             .WithMotionMagicAcceleration(160_tr_per_s_sq)
             .WithMotionMagicJerk(1600_tr_per_s_cu)
+        )
+            .WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}
+            .WithInverted(ctre::phoenix6::signals::InvertedValue::CounterClockwise_Positive)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
             .WithSensorToMechanismRatio(1.25)
