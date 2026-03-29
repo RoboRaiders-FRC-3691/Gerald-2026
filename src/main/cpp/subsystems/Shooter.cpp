@@ -7,8 +7,8 @@
 using namespace ShooterConstants;
 
 Shooter::Shooter() : 
-m_FlywheelL(kCanIDL, kCanBus), m_VelRequestOne(0_rpm), 
-m_FlywheelR(kCanIDR, kCanBus), m_VelRequestTwo(0_rpm),
+m_FlywheelL(kCanIDL, kCanBus),
+m_FlywheelR(kCanIDR, kCanBus), m_FlywheelVelRequest(0_rpm),
 m_ShooterFeed(kCanIDFeed, kCanBus), m_VelRequestFeed(0_rpm) {
     m_FlywheelL.GetConfigurator().Apply(KFlywheelL);
     m_FlywheelR.GetConfigurator().Apply(KFlywheelR);
@@ -18,7 +18,7 @@ m_ShooterFeed(kCanIDFeed, kCanBus), m_VelRequestFeed(0_rpm) {
 
 frc2::CommandPtr Shooter::SetFlywheelVel(units::turns_per_second_t vel){
     return RunOnce([this, vel] {
-                m_FlywheelR.SetControl(m_VelRequestTwo.WithVelocity(vel));
+                m_FlywheelR.SetControl(m_FlywheelVelRequest.WithVelocity(vel));
         });
 }
 
