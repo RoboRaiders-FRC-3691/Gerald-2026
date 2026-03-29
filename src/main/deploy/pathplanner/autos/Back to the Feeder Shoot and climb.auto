@@ -1,0 +1,55 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Drop Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Back to the Feeder"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Feeder to Hub"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot Starting Fuel"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right side shoot to climb line up"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": " right side climb lineup"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
