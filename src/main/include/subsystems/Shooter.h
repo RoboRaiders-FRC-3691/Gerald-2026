@@ -55,12 +55,12 @@ class Shooter : public frc2::SubsystemBase {
 
   ctre::phoenix6::hardware::TalonFX m_FlywheelL;
 
-  ctre::phoenix6::controls::MotionMagicVelocityTorqueCurrentFOC m_VelRequestOne;
+  ctre::phoenix6::controls::VelocityTorqueCurrentFOC m_VelRequestOne;
 
   
   ctre::phoenix6::hardware::TalonFX m_FlywheelR;
 
-  ctre::phoenix6::controls::MotionMagicVelocityTorqueCurrentFOC m_VelRequestTwo;
+  ctre::phoenix6::controls::VelocityTorqueCurrentFOC m_VelRequestTwo;
 
   
   ctre::phoenix6::hardware::TalonFX m_ShooterFeed;

@@ -122,12 +122,12 @@ namespace ShooterConstants {
     static constexpr ctre::phoenix6::configs::TalonFXConfiguration KFlywheelL = ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(ctre::phoenix6::configs::Slot0Configs{}
                     
-            .WithKP(5)
+            .WithKP(23)
             .WithKI(0)
-            .WithKD(0.45)
+            .WithKD(0)
 
-            .WithKS(0.45)
-            .WithKV(0.175)
+            .WithKS(2.3)
+            .WithKV(0.0023)
             .WithKA(0)
             .WithKG(0)
             .WithGravityType(ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
