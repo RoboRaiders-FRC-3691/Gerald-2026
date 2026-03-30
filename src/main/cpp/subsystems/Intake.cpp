@@ -37,7 +37,7 @@ units::turn_t Intake::GetAnglePivotMotor(){
 
 frc2::CommandPtr Intake::SetVel(units::turns_per_second_t vel){
       return RunOnce([this, vel] {
-          m_RollerMotor.SetControl(m_VelRequest.WithVelocity(vel).WithEnableFOC(true));
+          m_RollerMotor.SetControl(m_VelRequest.WithVelocity(vel));
   });
 }
 

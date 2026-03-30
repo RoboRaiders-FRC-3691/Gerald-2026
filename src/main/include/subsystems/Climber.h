@@ -31,7 +31,7 @@ public:
 
    frc2::CommandPtr RaiseClimber();
 
-   frc2::CommandPtr Climb();
+
    
    void Periodic() override;
 

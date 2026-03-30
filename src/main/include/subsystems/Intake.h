@@ -46,5 +46,5 @@ class Intake : public frc2::SubsystemBase {
   ctre::phoenix6::controls::MotionMagicVoltage m_PoseRequest;
 
   ctre::phoenix6::hardware::TalonFX m_RollerMotor;
-  ctre::phoenix6::controls::MotionMagicVelocityVoltage m_VelRequest;
+  ctre::phoenix6::controls::VelocityTorqueCurrentFOC m_VelRequest;
 };
