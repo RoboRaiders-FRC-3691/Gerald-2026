@@ -169,12 +169,12 @@ namespace ShooterConstants {
     static constexpr ctre::phoenix6::configs::TalonFXConfiguration KFeedConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(ctre::phoenix6::configs::Slot0Configs{}
                     
-            .WithKP(4)
+            .WithKP(20)
             .WithKI(0)
-            .WithKD(0.1)
+            .WithKD(0)
 
-            .WithKS(0.5)
-            .WithKV(0.2)
+            .WithKS(4)
+            .WithKV(0.1)
             .WithKA(0)
             .WithKG(0)
             .WithGravityType(ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)

@@ -63,7 +63,7 @@ class Shooter : public frc2::SubsystemBase {
   
   ctre::phoenix6::hardware::TalonFX m_ShooterFeed;
 
-  ctre::phoenix6::controls::MotionMagicVelocityTorqueCurrentFOC m_VelRequestFeed;
+  ctre::phoenix6::controls::VelocityTorqueCurrentFOC m_VelRequestFeed;
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
