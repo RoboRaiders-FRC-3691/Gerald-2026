@@ -21,18 +21,6 @@
           "data": {
             "name": "Shoot Starting Fuel"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Right side shoot to climb"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Raise Intake"
-          }
         }
       ]
     }

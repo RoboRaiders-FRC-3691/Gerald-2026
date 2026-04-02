@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5574733096085422,
-        "y": 5.514389086595493
+        "x": 2.682,
+        "y": 4.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.1532122938565355,
-        "y": 5.5210376872416695
+        "x": 2.929942681481763,
+        "y": 4.0320066664873595
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "MiddleDriveBackwordsEndPoint"
     },
     {
       "anchor": {
-        "x": 3.3422894424673792,
-        "y": 5.514389086595493
+        "x": 1.501,
+        "y": 3.3
       },
       "prevControl": {
-        "x": 3.591789551933988,
-        "y": 5.498587334282851
+        "x": 1.268684765664938,
+        "y": 3.207643993720791
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "climbingpos"
     }
   ],
   "rotationTargets": [],

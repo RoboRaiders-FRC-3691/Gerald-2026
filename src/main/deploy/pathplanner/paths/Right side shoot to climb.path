@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.5,
-        "y": 5.576
+        "x": 3.315,
+        "y": 2.937
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6078908418944147,
-        "y": 5.801900974384512
+        "x": 2.0062136245291744,
+        "y": 3.0250837035680207
       },
       "isLocked": false,
-      "linkedName": "Left side climb lineup start pos"
+      "linkedName": "right side shooting pos"
     },
     {
       "anchor": {
-        "x": 1.105,
-        "y": 4.576
+        "x": 1.501,
+        "y": 3.3
       },
       "prevControl": {
-        "x": 1.2858485277726122,
-        "y": 5.053169183975918
+        "x": 1.8068981023839643,
+        "y": 3.370309268200578
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "climbingpos"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "left side",
+  "folder": "right side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 50.0
   },
   "useDefaultConstraints": true
 }
