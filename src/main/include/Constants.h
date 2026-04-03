@@ -102,7 +102,7 @@ namespace IntakeConstants {
             .WithMotionMagicJerk(1600_tr_per_s_cu)
         )
             .WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}
-            .WithInverted(ctre::phoenix6::signals::InvertedValue::CounterClockwise_Positive)
+            .WithInverted(ctre::phoenix6::signals::InvertedValue::Clockwise_Positive)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
             .WithSensorToMechanismRatio(1.25)
