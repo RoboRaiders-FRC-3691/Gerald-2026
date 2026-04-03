@@ -257,9 +257,9 @@ namespace AutoConstants{
 
     class ShooterPositions {
         public:
-            inline static const frc::Pose2d kLeft{110_in, 70_in, 0_deg};
-            inline static const frc::Pose2d kMiddle{110_in, 70_in, 0_deg};
-            inline static const frc::Pose2d kRight{110_in, 70_in, 0_deg};
+            inline static const frc::Pose2d kLeft{130.6_in, 202.1_in, -164.1_deg};
+            inline static const frc::Pose2d kMiddle{105.6_in, 157.5_in, 180_deg};
+            inline static const frc::Pose2d kRight{130.5_in, 115.6_in, 134.95_deg};
 
         private:
             ShooterPositions() = default;

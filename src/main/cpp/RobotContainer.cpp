@@ -60,8 +60,11 @@ void RobotContainer::ConfigureBindings()
     m_XboxController.LeftBumper().WhileTrue(m_intake.RunIntakeReverse()); // SPITS OUT FUEL FROM INTAKE
     m_XboxController.X().OnTrue(m_intake.DropIntake()); // LOWERS INTAKE
     m_XboxController.Y().OnTrue(m_intake.RaiseIntake()); // RAISES INTAKE
-    m_XboxController.POVUp().OnTrue(m_climber.RaiseClimber()); // RAISES CLIMBER 
-    m_XboxController.POVDown().OnTrue(m_climber.LowerClimber()); // LOWERS CLIMBER
+    (m_XboxController.POVUp() && !m_XboxController.A()).OnTrue(m_climber.RaiseClimber()); // RAISES CLIMBER 
+    (m_XboxController.POVDown() && !m_XboxController.A()).OnTrue(m_climber.LowerClimber()); // LOWERS CLIMBER
+    (m_XboxController.POVUp() && m_XboxController.A()).OnTrue(drivetrain.PathfindTo(AutoConstants::ShooterPositions::kMiddle)); // 
+    (m_XboxController.POVLeft() && m_XboxController.A()).OnTrue(drivetrain.PathfindTo(AutoConstants::ShooterPositions::kLeft));
+    (m_XboxController.POVRight() && m_XboxController.A()).OnTrue(drivetrain.PathfindTo(AutoConstants::ShooterPositions::kRight));
 }
 
 void RobotContainer::PathPlannerSetUp(){
