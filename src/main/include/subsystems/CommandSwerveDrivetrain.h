@@ -324,6 +324,8 @@ public:
     // Implemented by Team 3691
 
     void UpdateOdometryWithVision();
+
+    frc2::CommandPtr PathfindTo(frc::Pose2d pose);
     
     void RegisterVisionCallback (std::function<std::vector<VisionMeasurement>()> callback);
     

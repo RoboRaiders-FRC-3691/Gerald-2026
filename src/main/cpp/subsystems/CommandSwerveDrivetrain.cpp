@@ -111,9 +111,35 @@ void CommandSwerveDrivetrain::UpdateOdometryWithVision (){
     for (auto& result : visionResults){
         AddVisionMeasurement(result.estimatedPose, result.timestamp, result.stdDevs);
     }
+}
+
+
+frc2::CommandPtr CommandSwerveDrivetrain::PathfindTo(frc::Pose2d pose){
+    
+    auto alliance = frc::DriverStation::GetAlliance();
+            if (!alliance) {
+                return frc2::cmd::Print("Error alliance not found while performing Reef line up.");
+            }
+
+            if(alliance.value() == frc::DriverStation::Alliance::kBlue){
+                return pathplanner::AutoBuilder::pathfindToPose(
+                    pose,
+                    AutoConstants::kConstraints,
+                    0_fps
+                );
+            }
+            else{
+                return pathplanner::AutoBuilder::pathfindToPoseFlipped(
+                    pose,
+                    AutoConstants::kConstraints,
+                    0_fps
+                );
+            }
+            
+}
 
     // ADD BACK AFTER DEBUG LOGGING FLAG FIXED
     // Logging::Debug(fmt::format("[DRIVETRAIN] Applied {} vision measurements to odometry.", 
     //           visionResults.size()));
-}
+
 

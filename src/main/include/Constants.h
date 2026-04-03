@@ -12,6 +12,7 @@
 #include <units/angular_acceleration.h>
 #include <units/angular_jerk.h>
 #include <units/length.h>
+#include <frc/geometry/Pose2d.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc/apriltag/AprilTagFields.h>
 #include <frc/apriltag/AprilTagFieldLayout.h>
@@ -245,6 +246,25 @@ namespace VisionConstants {
 
     // Standard deviations scale factor limit (scaled as: distance^2 * kStdDevsScaleFactorLimit/(MaxTagDistance^2))
     inline constexpr double kStdDevsScaleFactorLimit = 1.0 / 30.0;
+
+}
+
+namespace AutoConstants{
+
+    inline constexpr pathplanner::PathConstraints kConstraints = pathplanner::PathConstraints(
+        3.0_mps, 3.0_mps_sq,
+        540_deg_per_s, 720_deg_per_s_sq);
+
+    class ShooterPositions {
+        public:
+            inline static const frc::Pose2d kLeft{110_in, 70_in, 0_deg};
+            inline static const frc::Pose2d kMiddle{110_in, 70_in, 0_deg};
+            inline static const frc::Pose2d kRight{110_in, 70_in, 0_deg};
+
+        private:
+            ShooterPositions() = default;
+    };
+
 
 }
 
