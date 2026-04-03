@@ -118,7 +118,7 @@ frc2::CommandPtr CommandSwerveDrivetrain::PathfindTo(frc::Pose2d pose){
     
     auto alliance = frc::DriverStation::GetAlliance();
             if (!alliance) {
-                return frc2::cmd::Print("Error alliance not found while performing Reef line up.");
+                return frc2::cmd::Print("Error alliance not found while performing line up.");
             }
 
             if(alliance.value() == frc::DriverStation::Alliance::kBlue){

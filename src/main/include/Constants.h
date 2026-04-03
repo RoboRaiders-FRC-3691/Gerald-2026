@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <pathplanner/lib/path/PathConstraints.h>
 #include <units/time.h>
 #include <units/angle.h>
 #include <units/angular_velocity.h>
