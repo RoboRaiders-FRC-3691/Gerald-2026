@@ -113,29 +113,21 @@ void CommandSwerveDrivetrain::UpdateOdometryWithVision (){
     }
 }
 
+frc2::CommandPtr subsystems::CommandSwerveDrivetrain::PathfindAndFollowPath(std::string pathName){
+    auto path = pathplanner::PathPlannerPath::fromPathFile(pathName);
+
+    return pathplanner::AutoBuilder::pathfindThenFollowPath(
+    path,
+    AutoConstants::kConstraints
+    );
+}
 
 frc2::CommandPtr CommandSwerveDrivetrain::PathfindTo(frc::Pose2d pose){
-    
-    auto alliance = frc::DriverStation::GetAlliance();
-            if (!alliance) {
-                return frc2::cmd::Print("Error alliance not found while performing line up.");
-            }
-
-            if(alliance.value() == frc::DriverStation::Alliance::kBlue){
-                return pathplanner::AutoBuilder::pathfindToPose(
-                    pose,
-                    AutoConstants::kConstraints,
-                    0_fps
-                );
-            }
-            else{
-                return pathplanner::AutoBuilder::pathfindToPoseFlipped(
-                    pose,
-                    AutoConstants::kConstraints,
-                    0_fps
-                );
-            }
-            
+    return pathplanner::AutoBuilder::pathfindToPoseFlipped(
+        pose,
+        AutoConstants::kConstraints,
+        0_fps
+    );
 }
 
     // ADD BACK AFTER DEBUG LOGGING FLAG FIXED

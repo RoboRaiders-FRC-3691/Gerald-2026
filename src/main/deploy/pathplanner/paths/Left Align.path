@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.682,
-        "y": 4.0
+        "x": 3.0,
+        "y": 5.134
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.9839828815977174,
-        "y": 1.7125106990014278
+        "x": 3.7134253279560934,
+        "y": 5.148070190580323
       },
       "isLocked": false,
-      "linkedName": "MiddleDriveBackwordsEndPoint"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.105,
-        "y": 1.7125106990014274
+        "x": 3.317,
+        "y": 5.134
       },
       "prevControl": {
-        "x": 2.7969472182596284,
-        "y": 3.989714693295293
+        "x": 2.757436661674548,
+        "y": 5.110177396787222
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ClimbLineupStartPoint"
+      "linkedName": "left shooting pos"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": -34.777
   },
   "reversed": false,
-  "folder": null,
+  "folder": "left side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -34.777
   },
   "useDefaultConstraints": true
 }

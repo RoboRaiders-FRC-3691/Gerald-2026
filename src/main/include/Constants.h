@@ -205,21 +205,21 @@ namespace ClimberConstants {
 
     static constexpr ctre::phoenix6::configs::TalonFXConfiguration KClimberConfigs = ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(ctre::phoenix6::configs::Slot0Configs{}
-            .WithKS(.12)
-            .WithKV(.2)
-            .WithKA(.025)
+            .WithKS(1.5)
+            .WithKV(0)
+            .WithKA(0)
 
-            .WithKP(4)
+            .WithKP(5)
             .WithKI(0)
-            .WithKD(.5)
+            .WithKD(.2)
 
-            .WithKG(.2)
+            .WithKG(-0)
             .WithGravityType(ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
         )
         .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
-            .WithMotionMagicCruiseVelocity(150_tps)
-            .WithMotionMagicAcceleration(250_tr_per_s_sq)
-            .WithMotionMagicJerk(2500_tr_per_s_cu)
+            .WithMotionMagicCruiseVelocity(6_tps)
+            .WithMotionMagicAcceleration(12_tr_per_s_sq)
+            .WithMotionMagicJerk(24_tr_per_s_cu)
         )
         .WithFeedback(ctre::phoenix6::configs::FeedbackConfigs{}
             .WithSensorToMechanismRatio(12)
@@ -256,14 +256,14 @@ namespace AutoConstants{
         3.0_mps, 3.0_mps_sq,
         540_deg_per_s, 720_deg_per_s_sq);
 
-    class ShooterPositions {
+    class ShooterAlignPath {
         public:
-            inline static const frc::Pose2d kLeft{130.6_in, 202.1_in, -164.1_deg};
-            inline static const frc::Pose2d kMiddle{105.6_in, 157.5_in, 180_deg};
-            inline static const frc::Pose2d kRight{130.5_in, 115.6_in, 134.95_deg};
+            inline static const std::string kMiddle = "Middle Align";
+            inline static const std::string kLeft = "Left Align";
+            inline static const std::string kRight = "Right Align";
 
         private:
-            ShooterPositions() = default;
+            ShooterAlignPath() = default;
     };
 
 

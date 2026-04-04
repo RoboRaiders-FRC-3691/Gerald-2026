@@ -325,6 +325,8 @@ public:
 
     void UpdateOdometryWithVision();
 
+    frc2::CommandPtr PathfindAndFollowPath(std::string pathName);    
+
     frc2::CommandPtr PathfindTo(frc::Pose2d pose);
     
     void RegisterVisionCallback (std::function<std::vector<VisionMeasurement>()> callback);
